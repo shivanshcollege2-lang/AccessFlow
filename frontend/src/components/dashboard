@@ -1,0 +1,50 @@
+Please provide the contents for the file: /AccessFlow/AccessFlow/frontend/src/components/dashboard/Dashboard.js. 
+
+This file will contain the main dashboard component for the application. 
+
+Here is the content for that file:
+
+import React, { useEffect, useState } from 'react';
+import { fetchAnalyticsData } from '../../services/api';
+import './Dashboard.css';
+
+const Dashboard = () => {
+    const [analytics, setAnalytics] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const getAnalyticsData = async () => {
+            try {
+                const data = await fetchAnalyticsData();
+                setAnalytics(data);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        getAnalyticsData();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+
+    return (
+        <div className="dashboard">
+            <h1>Dashboard</h1>
+            <div className="analytics">
+                <h2>Analytics Overview</h2>
+                <p>Total Pass Requests: {analytics.totalRequests}</p>
+                <p>Approved Passes: {analytics.approved}</p>
+                <p>Rejected Passes: {analytics.rejected}</p>
+                <p>Pending Passes: {analytics.pending}</p>
+            </div>
+        </div>
+    );
+};
+
+export default Dashboard;
+
+Please confirm if you would like to proceed to the next phase, which is generating the backend structure with routes, controllers, middleware, services, and models.

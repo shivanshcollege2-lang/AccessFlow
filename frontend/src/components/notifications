@@ -1,0 +1,49 @@
+Here are the contents for the file: /AccessFlow/AccessFlow/frontend/src/components/notifications/index.js
+
+import React, { useEffect, useState } from 'react';
+import { fetchNotifications } from '../../services/api';
+import NotificationItem from './NotificationItem';
+import './notifications.css';
+
+const Notifications = () => {
+    const [notifications, setNotifications] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadNotifications = async () => {
+            try {
+                const data = await fetchNotifications();
+                setNotifications(data);
+            } catch (error) {
+                console.error('Error fetching notifications:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadNotifications();
+    }, []);
+
+    if (loading) {
+        return <div>Loading notifications...</div>;
+    }
+
+    return (
+        <div className="notifications-container">
+            <h2>Notifications</h2>
+            {notifications.length === 0 ? (
+                <p>No notifications available.</p>
+            ) : (
+                <ul>
+                    {notifications.map(notification => (
+                        <NotificationItem key={notification.id} notification={notification} />
+                    ))}
+                </ul>
+            )}
+        </div>
+    );
+};
+
+export default Notifications;
+
+Please confirm if you would like to proceed to the next phase, which is generating the backend structure with routes, controllers, middleware, services, and models.
