@@ -1,4 +1,4 @@
-# AccessFlow - Intelligent Campus Mobility & Authorization Platform
+# AccessFlow -  Campus Pass & Access Management System
 
 ## Overview
 AccessFlow is a full-stack application designed to facilitate intelligent campus mobility and authorization. It provides a seamless experience for students, security personnel, and administrators to manage pass requests, track history, and ensure secure access across campus facilities.
